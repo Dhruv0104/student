@@ -10,6 +10,9 @@
     />
   </head>
   <body>
+    <%- include('include/navbar') %>
+
+    <!-- Registration Form -->
     <div class="container-fluid p-5">
       <div class="card shadow rounded-3 bg-white w-100 px-5 py-3">
         <form action="/register" method="post" enctype="multipart/form-data">
@@ -130,9 +133,7 @@
                 value="Cricket"
                 id="Cricket"
               />
-              <label class="form-check-label" for="Cricket">
-                Cricket
-              </label>
+              <label class="form-check-label" for="Cricket"> Cricket </label>
             </div>
             <div class="form-check col-md-1">
               <input
@@ -142,9 +143,7 @@
                 value="Dancing"
                 id="Dancing"
               />
-              <label class="form-check-label" for="Dancing">
-                Dancing
-              </label>
+              <label class="form-check-label" for="Dancing"> Dancing </label>
             </div>
             <div class="form-check col-md-1">
               <input
@@ -154,9 +153,7 @@
                 value="Singing"
                 id="Singing"
               />
-              <label class="form-check-label" for="Singing">
-                Singing
-              </label>
+              <label class="form-check-label" for="Singing"> Singing </label>
             </div>
           </div>
 
@@ -164,7 +161,11 @@
           <div class="row">
             <!-- Academic Year -->
             <div class="col-md-3">
-              <select class="form-select" name="academicYear" aria-label="Default select example">
+              <select
+                class="form-select"
+                name="academicYear"
+                aria-label="Default select example"
+              >
                 <option selected>Select Academic Year</option>
                 <option value="2024">2024</option>
                 <option value="2025">2025</option>
@@ -175,7 +176,12 @@
 
             <!-- Photograph -->
             <div class="mb-3 col-md-3">
-              <input class="form-control" name="photo" type="file" id="formFile" />
+              <input
+                class="form-control"
+                name="photo"
+                type="file"
+                id="formFile"
+              />
             </div>
           </div>
 

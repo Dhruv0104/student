@@ -1,33 +1,45 @@
+require("dotenv").config();
 const express = require("express");
-const multer = require("multer");
-const morgan = require('morgan');
+const session = require("express-session");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+
+const { dbConnect } = require("./utils/db.util");
+const { errorHandler, asyncRouteHandler } = require("./utils/route.util");
+
+// Routes
+const studentRoutes = require("./routes/student.route");
+const commanRoutes = require("./routes/common.route");
 
 const app = express();
 
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('dev'));
+app.use(morgan("dev"));
+app.use(cookieParser());
 
 app.set("view engine", "ejs");
 
-app.get("/", (req, res, next) => {
-  res.render("registration");
-});
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
-app.post("/register", async (req, res, next) => {
-  console.log(req.body);
-  console.log(req.file);
+// Routes
+app.use("", commanRoutes);
+app.use("/student", studentRoutes);
 
-//   const documentUpload = new studentUploadDocsModel({
-//     student_id: student_id,
-//     document_id: doc_id,
-//     doc_number: document_number,
-//     file_path: document.path.slice(6),
-//   });
-//   await documentUpload.save();
-  res.redirect("/");
-});
-
-const port = 3000;
-app.listen(port);
+dbConnect()
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log("http://localhost:3000/");
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    console.log("DB ERROR");
+  });

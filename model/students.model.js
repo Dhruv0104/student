@@ -12,7 +12,7 @@ const studentSchema = new mongoose.Schema(
 
     gender: { type: String },
     address: { type: String },
-    hobbies: { type: String },
+    hobbies: [String],
     academic_year: { type: String },
     photo_path: { type: String },
 
