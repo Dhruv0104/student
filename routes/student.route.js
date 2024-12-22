@@ -36,5 +36,7 @@ function authMiddleware() {
 
 // Manage Student
 router.get("/", studentController.students);
+router.get("/:id", studentController.studentData);
+router.post("/editStudent", studentController.editStudent);
 
 module.exports = router;
