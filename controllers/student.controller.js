@@ -2,7 +2,7 @@ const studentModel = require("../model/students.model");
 
 // Manage Students
 async function students(req, res, next) {
-  const students = await studentModel.find({ username: { $ne: "admin" } });
+  const students = await studentModel.find({ username: { $ne: "admin" }, isActive: true });
   res.render("manage-student", { students: students });
 }
 
@@ -33,4 +33,14 @@ async function editStudent(req, res, next) {
   res.redirect("/student/");
 }
 
-module.exports = { students, studentData, editStudent };
+async function deleteStudent(req, res, next) {
+  const { deleteId } = req.body;
+  const student = await studentModel.findOne({ _id: deleteId });
+  student.isActive = false;
+  
+  await student.save();
+
+  res.json({ success: true });
+}
+
+module.exports = { students, studentData, editStudent, deleteStudent };

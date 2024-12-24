@@ -1,0 +1,9 @@
+<% if (sweetalert != null) { %>
+<script>
+  Swal.fire({
+    title: "<%= sweetalert.title %>",
+    text: "<%= sweetalert.text %>",
+    icon: "<%= sweetalert.icon %>",
+  });
+</script>
+<% } %>

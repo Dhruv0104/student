@@ -33,6 +33,8 @@ app.use(
 app.use("", commanRoutes);
 app.use("/student", studentRoutes);
 
+app.use(errorHandler);
+
 dbConnect()
   .then(() => {
     app.listen(process.env.PORT, () => {

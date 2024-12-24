@@ -5,6 +5,8 @@ const fs = require("fs");
 
 const commonController = require("../controllers/comman.controller")
 
+const { asyncRouteHandler } = require('../utils/route.util');
+
 const router = express.Router();
 
 // router.use(authMiddleware());
@@ -56,13 +58,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Registration Route
-router.get("/", commonController.registrationPage);
-router.post("/register",upload.single("photo"), commonController.register);
+router.get("/", asyncRouteHandler(commonController.registrationPage));
+router.post("/register",upload.single("photo"), asyncRouteHandler(commonController.register));
 
 // Login Route
-router.get("/login", commonController.loginPage);
-router.post("/login", commonController.login);
-router.get("/logout", commonController.logout);
+router.get("/login", asyncRouteHandler(commonController.loginPage));
+router.post("/login", asyncRouteHandler(commonController.login));
+router.get("/logout", asyncRouteHandler(commonController.logout));
 
 
 module.exports = router;

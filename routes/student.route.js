@@ -2,7 +2,10 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 
 const studentController = require("../controllers/student.controller");
+
 const studentModel = require("../model/students.model");
+
+const { asyncRouteHandler } = require('../utils/route.util');
 
 const router = express.Router();
 
@@ -35,8 +38,9 @@ function authMiddleware() {
 }
 
 // Manage Student
-router.get("/", studentController.students);
-router.get("/:id", studentController.studentData);
-router.post("/editStudent", studentController.editStudent);
+router.get("/", asyncRouteHandler(studentController.students));
+router.get("/:id", asyncRouteHandler(studentController.studentData));
+router.post("/editStudent", asyncRouteHandler(studentController.editStudent));
+router.post("/delete", asyncRouteHandler(studentController.deleteStudent));
 
 module.exports = router;
