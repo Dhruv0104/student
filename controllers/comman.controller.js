@@ -61,12 +61,12 @@ async function register(req, res, next) {
     address: address,
     hobbies: hobby,
     academic_year: academicYear,
-    photo_path: photo.path,
+    photo_path: photo.path.slice(6),
     // file_path: document.path.slice(6),
   });
   await student.save();
-
-  res.redirect("/");
+  req.session.sweetalert = { title: 'Registration Done',text: 'Credentials sent to your Registered Email ID', icon: 'success' }
+  res.redirect("/login");
 }
 async function Username() {
   const count = await studentModel.countDocuments({});

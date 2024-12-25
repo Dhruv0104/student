@@ -178,7 +178,9 @@
                 name="photo"
                 type="file"
                 id="formFile"
+                onchange="getPreviewImage(event)"
               />
+              <div class="photoPreview"></div>
             </div>
           </div>
 
@@ -187,5 +189,19 @@
         </form>
       </div>
     </div>
+
+    <script>
+      async function getPreviewImage(event) {
+        var image = URL.createObjectURL(event.target.files[0]);
+        $(".photoPreview").html('');
+        $(".photoPreview").append(`<img
+                    src="${image}"
+                    width="100"
+                    class="img-thumbnail"
+                    alt="Photo"
+                  />`);
+      }
+    </script>
+    <%- include('include/sweetalert') %>
   </body>
 </html>
