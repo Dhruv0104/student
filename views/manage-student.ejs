@@ -9,76 +9,56 @@
   <body>
     <%- include('include/navbar') %>
 
-    <div class="container-fluid p-5">
-      <div class="card shadow rounded-3 bg-white w-100 px-5 py-3">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Sr.</th>
-              <th scope="col">Name</th>
-              <th scope="col">DOB</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Hoobies</th>
-              <th scope="col">Year</th>
-              <th scope="col">Photo</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for(var i=0;i< students.length; i++) {%>
-            <tr>
-              <th scope="row"><%= i+1 %></th>
-              <td><%= students[i].name %></td>
-              <td>
-                <%= new Date(students[i].dob).toISOString().split('T')[0] %>
-              </td>
-              <td><%= students[i].gender %></td>
-              <td>
-                <% for(var j=0;j< students[i].hobbies.length; j++){%>
-                <span class="badge rounded-pill text-bg-success"
-                  ><%= students[i].hobbies[j] %></span
-                >
+    <div class="container" style="padding-top: 7rem">
+      <div class="card shadow rounded-3 w-100">
+        <div class="card-body">
+          <h2 class="text-center card-title mb-2">Students</h2>
+          <table class="table table-bordered">
+            <thead class="text-center">
+              <tr>
+                <th scope="col">Sr.</th>
+                <th scope="col">Name</th>
+                <th scope="col">DOB</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Hoobies</th>
+                <th scope="col">Year</th>
+                <th scope="col">Photo</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i=0;i< students.length; i++) {%>
+              <tr>
+                <th scope="row" style="color: #0d4b7d"><%= i+1 %></th>
+                <td style="color: #0d4b7d"><%= students[i].name %></td>
+                <td style="color: #0d4b7d">
+                  <%= new Date(students[i].dob).toISOString().split('T')[0] %>
+                </td>
+                <td style="color: #0d4b7d"><%= students[i].gender %></td>
+                <td>
+                  <% for(var j=0;j< students[i].hobbies.length; j++){%>
+                  <span
+                    class="badge rounded-pill border"
+                    style="background-color: #bbdefb; color: #0d4b7d"
+                    ><%= students[i].hobbies[j] %></span
+                  >
 
-                <% }%>
-              </td>
-              <td><%= students[i].academic_year %></td>
-              <td>
-                <!-- <img
+                  <% }%>
+                </td>
+                <td style="color: #0d4b7d"><%= students[i].academic_year %></td>
+                <td class="text-center">
+                  <!-- <img
                   src="<%= students[i].photo_path %>"
                   width="100"
                   class="img-thumbnail"
                   alt="Photo"
                 /> -->
-                <!-- Photo Preview Button -->
-                <button
-                  type="button"
-                  class="btn btn-success"
-                  onclick="photoModal('<%= JSON.stringify(students[i].photo_path) %>')"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-eye"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"
-                    />
-                    <path
-                      d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td>
-                <div class="d-flex justify-content-center">
-                  <!-- View Button -->
+                  <!-- Photo Preview Button -->
                   <button
                     type="button"
-                    class="btn btn-success"
-                    onclick="viewModal('<%= students[i]._id %>')"
+                    class="btn"
+                    style="color: #009688"
+                    onclick="photoModal('<%= JSON.stringify(students[i].photo_path) %>')"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -96,56 +76,85 @@
                       />
                     </svg>
                   </button>
-
-                  <!-- Edit Button -->
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    onclick="editModal('<%= students[i]._id %>')"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-pencil-square"
-                      viewBox="0 0 16 16"
+                </td>
+                <td>
+                  <div class="d-flex justify-content-around">
+                    <!-- View Button -->
+                    <button
+                      type="button"
+                      class="btn"
+                      style="color: #009688"
+                      onclick="viewModal('<%= students[i]._id %>')"
                     >
-                      <path
-                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                      />
-                      <path
-                        fill-rule="evenodd"
-                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
-                      />
-                    </svg>
-                  </button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-eye"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"
+                        />
+                        <path
+                          d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"
+                        />
+                      </svg>
+                    </button>
 
-                  <!-- Delete Button -->
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    onclick="deleteAlert('<%= students[i]._id %>')"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-trash-fill"
-                      viewBox="0 0 16 16"
+                    <!-- Edit Button -->
+                    <button
+                      type="button"
+                      class="btn"
+                      style="color: #ffc107"
+                      onclick="editModal('<%= students[i]._id %>')"
                     >
-                      <path
-                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <% } %>
-          </tbody>
-        </table>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-pencil-square"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+                        />
+                      </svg>
+                    </button>
+
+                    <!-- Delete Button -->
+                    <button
+                      type="button"
+                      class="btn"
+                      style="color: #e53935"
+                      onclick="deleteAlert('<%= students[i]._id %>')"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <!-- Modals -->
@@ -169,104 +178,92 @@
             ></button>
           </div>
           <div class="modal-body">
+            <!-- Name and Email and Mobile-->
             <div class="row">
               <!-- Full Name -->
-              <div class="col-md-6">
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="name"
-                    id="viewName"
-                    placeholder="Full Name"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                    readonly
-                  />
-                </div>
+              <div class="col-md-4 mb-3">
+                <label for="viewName" class="form-label ms-2">Full Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  id="viewName"
+                  placeholder="Full Name"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  minlength="3"
+                  maxlength="50"
+                  pattern="[A-Za-z\s]+"
+                  title="Full name must contain only letters and spaces, and be at least 3 characters long."
+                  required
+                  disabled
+                />
               </div>
 
-              <!-- DOB -->
-              <div class="col-md-6">
-                <div class="input-group mb-3">
-                  <input
-                    type="date"
-                    id="viewDob"
-                    name="dob"
-                    class="form-control"
-                    readonly
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
               <!-- Email ID -->
-              <div class="col-md-6">
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="viewEmail"
-                    name="email"
-                    placeholder="Email ID"
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
-                    readonly
-                  />
-                </div>
+              <div class="col-md-4 mb-3">
+                <label for="viewEmail" class="form-label ms-2">Email ID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="viewEmail"
+                  name="email"
+                  placeholder="Email ID"
+                  aria-label="Recipient's username"
+                  aria-describedby="basic-addon2"
+                  disabled
+                  required
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                  title="Please enter a valid email address (e.g., example@domain.com)"
+                />
               </div>
 
               <!-- Mobile Number -->
-              <div class="col-md-6">
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="viewMobile"
-                    name="mobile"
-                    placeholder="Mobile Number"
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
-                    readonly
-                  />
-                </div>
-              </div>
-            </div>
-
-            <!-- Gender -->
-            <div class="row">
-              <div class="col-md-6">Gender : <span class="gender"></span></div>
-            </div>
-
-            <!-- Address -->
-            <div class="row">
-              <div class="form-floating col-md-7">
-                <textarea
+              <div class="col-md-4 mb-3">
+                <label for="viewMobile" class="form-label ms-2"
+                  >Mobile Number</label
+                >
+                <input
+                  type="text"
                   class="form-control"
-                  placeholder="Leave a comment here"
-                  name="address"
-                  id="viewAddress"
-                  style="height: 100px"
-                  readonly
-                ></textarea>
-                <label for="viewAddress">Address</label>
+                  id="viewMobile"
+                  name="mobile"
+                  placeholder="Mobile Number"
+                  aria-label="Recipient's username"
+                  aria-describedby="basic-addon2"
+                  disabled
+                  required
+                  pattern="[0-9]{10}"
+                  maxlength="10"
+                  title="Mobile number must be exactly 10 digits."
+                />
               </div>
             </div>
 
-            <!-- Hobbies -->
+            <!-- DOB and Acemeic Year and Gender-->
             <div class="row">
-              <div class="col-md-6">
-                Hobbies :
-                <span class="hobbies"></span>
+              <!-- DOB -->
+              <div class="col-md-4 mb-3">
+                <label for="viewDob" class="form-label ms-2"
+                  >Date of Birth</label
+                >
+                <input
+                  type="date"
+                  id="viewDob"
+                  name="dob"
+                  class="form-control"
+                  disabled
+                  required
+                  max=""
+                  min="1900-01-01"
+                />
               </div>
-              <!-- <div class="hobbies"></div> -->
-            </div>
 
-            <!-- Academic Year and Photograph -->
-            <div class="row">
               <!-- Academic Year -->
-              <div class="col-md-4">
+              <div class="col-md-4 mb-3">
+                <label for="viewAcedemicYear" class="form-label ms-2"
+                  >Academic Year</label
+                >
                 <select
                   class="form-select"
                   id="viewAcedemicYear"
@@ -282,16 +279,52 @@
                 </select>
               </div>
 
+              <!-- Gender -->
+              <div class="col-md-4">
+                <label for="viewGender" class="form-label ms-2">Gender</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="gender"
+                  id="viewGender"
+                  placeholder="Gender"
+                  aria-label=""
+                  aria-describedby="basic-addon1"
+                  disabled
+                />
+                <!-- Gender : <span class="gender"></span> -->
+              </div>
+            </div>
+
+            <!-- Address and Photograph -->
+            <div class="row">
+              <!-- Address -->
+              <div class="col-md-6 mb-3">
+                <label for="viewAddress" class="form-label ms-2">Address</label>
+                <textarea
+                  class="form-control"
+                  placeholder="Leave a comment here"
+                  name="address"
+                  id="viewAddress"
+                  style="height: 100px"
+                  disabled
+                ></textarea>
+              </div>
+
               <!-- Photograph -->
-              <div class="mb-3 col-md-4">
-                <!-- <img
+              <div class="col-md-3 mb-3">
+                <label for="photo" class="form-label ms-2">Photograph</label>
+                <img
                   src=""
                   width="100"
                   class="img-thumbnail viewPhoto"
                   alt="Photo"
-                /> -->
-                <!-- Photo Preview Button -->
-                <button type="button" class="btn btn-success previewPhoto">
+                />
+                <!-- <button
+                  type="button"
+                  class="btn previewPhoto"
+                  style="color: #009688"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -307,21 +340,20 @@
                       d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"
                     />
                   </svg>
-                </button>
+                </button> -->
+              </div>
+            </div>
+
+            <!-- Hobbies -->
+            <div class="row">
+              <label for="hobbies" class="form-label ms-2 mb-0"
+                >Hobbies:
+              </label>
+              <div class="col-md-12 mb-3">
+                <span class="hobbies"></span>
               </div>
             </div>
           </div>
-          <!-- Modal Footer -->
-          <!-- <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div> -->
         </div>
       </div>
     </div>
@@ -336,7 +368,11 @@
     >
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
-          <form action="/student/editStudent" method="post" enctype="multipart/form-data">
+          <form
+            action="/student/editStudent"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="editModalLabel">Edit Modal</h1>
               <button
@@ -348,174 +384,102 @@
             </div>
             <div class="modal-body">
               <input type="hidden" id="editId" name="id" />
+              <!-- Name and Email and Mobile-->
               <div class="row">
                 <!-- Full Name -->
-                <div class="col-md-6">
-                  <div class="input-group mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="name"
-                      id="editName"
-                      placeholder="Full Name"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
+                <div class="col-md-4 mb-3">
+                  <label for="editName" class="form-label ms-2"
+                    >Full Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    id="editName"
+                    placeholder="Full Name"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    minlength="3"
+                    maxlength="50"
+                    pattern="[A-Za-z\s]+"
+                    title="Full name must contain only letters and spaces, and be at least 3 characters long."
+                    required
+                  />
                 </div>
 
-                <!-- DOB -->
-                <div class="col-md-6">
-                  <div class="input-group mb-3">
-                    <input
-                      type="date"
-                      id="editDob"
-                      name="dob"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
                 <!-- Email ID -->
-                <div class="col-md-6">
-                  <div class="input-group mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="editEmail"
-                      name="email"
-                      placeholder="Email ID"
-                      aria-label="Recipient's username"
-                      aria-describedby="basic-addon2"
-                    />
-                  </div>
+                <div class="col-md-4 mb-3">
+                  <label for="editEmail" class="form-label ms-2"
+                    >Email ID</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="editEmail"
+                    name="email"
+                    placeholder="Email ID"
+                    aria-label="Recipient's username"
+                    aria-describedby="basic-addon2"
+                    required
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                    title="Please enter a valid email address (e.g., example@domain.com)"
+                  />
                 </div>
 
                 <!-- Mobile Number -->
-                <div class="col-md-6">
-                  <div class="input-group mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="editMobile"
-                      name="mobile"
-                      placeholder="Mobile Number"
-                      aria-label="Recipient's username"
-                      aria-describedby="basic-addon2"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Gender -->
-              <div class="row">
-                <div class="col-md-2">Gender :</div>
-                <!-- Male -->
-                <div class="form-check col-md-2">
+                <div class="col-md-4 mb-3">
+                  <label for="editMobile" class="form-label ms-2"
+                    >Mobile Number</label
+                  >
                   <input
-                    class="form-check-input editMale"
-                    type="radio"
-                    name="gender"
-                    id="editmale"
-                    value="MALE"
-                  />
-                  <label class="form-check-label" for="editmale"> Male </label>
-                </div>
-                <!-- Female -->
-                <div class="form-check col-md-2">
-                  <input
-                    class="form-check-input editFemale"
-                    type="radio"
-                    name="gender"
-                    id="editfemale"
-                    value="FEMALE"
-                  />
-                  <label class="form-check-label" for="editfemale">
-                    Female
-                  </label>
-                </div>
-              </div>
-
-              <!-- Address -->
-              <div class="row">
-                <div class="form-floating col-md-7">
-                  <textarea
+                    type="text"
                     class="form-control"
-                    placeholder="Leave a comment here"
-                    name="address"
-                    id="editAddress"
-                    style="height: 100px"
-                  ></textarea>
-                  <label for="viewAddress">Address</label>
+                    id="editMobile"
+                    name="mobile"
+                    placeholder="Mobile Number"
+                    aria-label="Recipient's username"
+                    aria-describedby="basic-addon2"
+                    required
+                    pattern="[0-9]{10}"
+                    maxlength="10"
+                    title="Mobile number must be exactly 10 digits."
+                  />
                 </div>
               </div>
 
-              <!-- Hobbies -->
+              <!-- DOB and Acemeic Year and Gender-->
               <div class="row">
-                <div class="col-md-2">Hobbies :</div>
-                <div class="form-check col-md-2">
+                <!-- DOB -->
+                <div class="col-md-4 mb-3">
+                  <label for="editDob" class="form-label ms-2"
+                    >Date of Birth</label
+                  >
                   <input
-                    class="form-check-input editWebDevelopment"
-                    name="hobby"
-                    type="checkbox"
-                    value="Web Development"
-                    id="edit Web Development"
+                    type="date"
+                    id="editDob"
+                    name="dob"
+                    class="form-control"
+                    required
+                    max=""
+                    min="1900-01-01"
                   />
-                  <label class="form-check-label" for="edit Web Development">
-                    Web Development
-                  </label>
                 </div>
-                <div class="form-check col-md-2">
-                  <input
-                    class="form-check-input editCricket"
-                    name="hobby"
-                    type="checkbox"
-                    value="Cricket"
-                    id="edit Cricket"
-                  />
-                  <label class="form-check-label" for="edit Cricket">
-                    Cricket
-                  </label>
-                </div>
-                <div class="form-check col-md-2">
-                  <input
-                    class="form-check-input editDancing"
-                    name="hobby"
-                    type="checkbox"
-                    value="Dancing"
-                    id="edit Dancing"
-                  />
-                  <label class="form-check-label" for="edit Dancing">
-                    Dancing
-                  </label>
-                </div>
-                <div class="form-check col-md-2">
-                  <input
-                    class="form-check-input editSinging"
-                    name="hobby"
-                    type="checkbox"
-                    value="Singing"
-                    id="edit Singing"
-                  />
-                  <label class="form-check-label" for="edit Singing">
-                    Singing
-                  </label>
-                </div>
-              </div>
 
-              <!-- Academic Year and Photograph -->
-              <div class="row">
                 <!-- Academic Year -->
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3">
+                  <label for="editAcedemicYear" class="form-label ms-2"
+                    >Academic Year</label
+                  >
                   <select
                     class="form-select"
                     id="editAcedemicYear"
                     name="academicYear"
                     aria-label="Default select example"
+                    required
                   >
-                    <option selected>Select Academic Year</option>
+                    <option value="" disabled selected>
+                      Select Academic Year
+                    </option>
                     <option value="2024">2024</option>
                     <option value="2025">2025</option>
                     <option value="2027">2027</option>
@@ -523,16 +487,134 @@
                   </select>
                 </div>
 
+                <!-- Gender -->
+                <div class="col-md-4 mb-3">
+                  <label for="gender" class="form-label ms-2 mb-3"
+                    >Gender</label
+                  >
+                  <br />
+                  <!-- Male -->
+                  <div class="form-check-inline">
+                    <input
+                      class="form-check-input editMale"
+                      type="radio"
+                      name="gender"
+                      id="editmale"
+                      value="MALE"
+                      required
+                    />
+                    <label class="form-check-label" for="editmale">
+                      Male
+                    </label>
+                  </div>
+                  <!-- Female -->
+                  <div class="form-check-inline">
+                    <input
+                      class="form-check-input editFemale"
+                      type="radio"
+                      name="gender"
+                      id="editfemale"
+                      value="FEMALE"
+                      required
+                    />
+                    <label class="form-check-label" for="editfemale">
+                      Female
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address and Photograph-->
+              <div class="row">
+                <!-- Address -->
+                <div class="col-md-6 mb-3">
+                  <label for="editAddress" class="form-label ms-2"
+                    >Address</label
+                  >
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    name="address"
+                    id="editAddress"
+                    style="height: 100px"
+                    required
+                    maxlength="200"
+                  ></textarea>
+                </div>
                 <!-- Photograph -->
-                <div class="mb-3 col-md-4">
+                <div class="col-md-4 mb-3">
+                  <label for="formFile" class="form-label ms-2"
+                    >Photograph</label
+                  >
                   <input
                     class="form-control"
                     name="photo"
                     type="file"
                     id="formFile"
                     onchange="getPreviewImage(event)"
+                    accept="image/*"
                   />
-                  <div class="editPhotoDiv"></div>
+                </div>
+                <div class="col-md-2 mb-3 my-auto editPhotoDiv"></div>
+              </div>
+
+              <!-- Hobbies -->
+              <div class="row">
+                <label for="hobbies" class="form-label ms-2">Hobbies</label>
+                <div class="col-md-12 mb-3">
+                  <div class="row ms-2">
+                    <div class="form-check col-md-2">
+                      <input
+                        class="form-check-input editWebDevelopment"
+                        name="hobby"
+                        type="checkbox"
+                        value="Web Development"
+                        id="edit Web Development"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="edit Web Development"
+                      >
+                        Web Development
+                      </label>
+                    </div>
+                    <div class="form-check col-md-2">
+                      <input
+                        class="form-check-input editCricket"
+                        name="hobby"
+                        type="checkbox"
+                        value="Cricket"
+                        id="edit Cricket"
+                      />
+                      <label class="form-check-label" for="edit Cricket">
+                        Cricket
+                      </label>
+                    </div>
+                    <div class="form-check col-md-2">
+                      <input
+                        class="form-check-input editDancing"
+                        name="hobby"
+                        type="checkbox"
+                        value="Dancing"
+                        id="edit Dancing"
+                      />
+                      <label class="form-check-label" for="edit Dancing">
+                        Dancing
+                      </label>
+                    </div>
+                    <div class="form-check col-md-2">
+                      <input
+                        class="form-check-input editSinging"
+                        name="hobby"
+                        type="checkbox"
+                        value="Singing"
+                        id="edit Singing"
+                      />
+                      <label class="form-check-label" for="edit Singing">
+                        Singing
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -578,10 +660,11 @@
           .split("T")[0];
         $("#viewEmail")[0].value = student.email;
         $("#viewMobile")[0].value = student.mobile;
+        $("#viewGender")[0].value = student.gender;
 
-        const gender = student.gender;
-        let htmlGender = `<span>${gender}</span>`;
-        $(".gender").html(htmlGender);
+        // const gender = student.gender;
+        // let htmlGender = `<span>${gender}</span>`;
+        // $(".gender").html(htmlGender);
         // if (gender == "MALE") {
         //   $(".viewMale")[0].setAttribute("checked", true);
         // } else if (gender == "FEMALE") {
@@ -595,17 +678,17 @@
         const hobbies = student.hobbies;
         let html = ``;
         for (let i = 0; i < hobbies.length; i++) {
-          html += `<span class="badge rounded-pill text-bg-success"
+          html += `<span class="badge rounded-pill border" style="background-color: #bbdefb; color: #0d4b7d"
                   >${hobbies[i]}</span
-                >`;
+                > `;
         }
         $(".hobbies").html(html);
 
-        // $('.viewPhoto').attr('src', `${encodeURIComponent(student.photo_path)}`);
-        $(".previewPhoto").attr(
-          "onclick",
-          `photoModal('${JSON.stringify(student.photo_path)}')`
-        );
+        $(".viewPhoto").attr("src", `${student.photo_path}`);
+        // $(".previewPhoto").attr(
+        //   "onclick",
+        //   `photoModal('${JSON.stringify(student.photo_path)}')`
+        // );
 
         $("#viewModal").modal("toggle");
       }
@@ -647,7 +730,7 @@
         }
 
         if (student.photo_path) {
-          $(".editPhotoDiv").html('');
+          $(".editPhotoDiv").html("");
           $(".editPhotoDiv").append(`<img
                     src="${student.photo_path}"
                     width="100"
@@ -661,7 +744,7 @@
 
       async function getPreviewImage(event) {
         var image = URL.createObjectURL(event.target.files[0]);
-        $(".editPhotoDiv").html('');
+        $(".editPhotoDiv").html("");
         $(".editPhotoDiv").append(`<img
                     src="${image}"
                     width="100"
@@ -730,6 +813,18 @@
         $(".photoModal").html(photoHtml);
         $("#photoModal").modal("toggle");
       }
+      
+      // Validations
+      const today = new Date();
+      const eighteenYearsAgo = new Date(
+        today.getFullYear() - 18,
+        today.getMonth(),
+        today.getDate()
+      )
+        .toISOString()
+        .split("T")[0];
+
+      $('input[name="dob"]').attr("max", eighteenYearsAgo);
     </script>
     <%- include('include/sweetalert') %>
   </body>
