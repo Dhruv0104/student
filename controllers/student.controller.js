@@ -6,6 +6,9 @@ async function students(req, res, next) {
     username: { $ne: "admin" },
     isActive: true,
   });
+  console.log(req.cookies);
+  console.log(req.cookies.auth);
+  
   res.render("manage-student", { students: students });
 }
 

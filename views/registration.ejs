@@ -10,197 +10,272 @@
     <%- include('include/navbar') %>
 
     <!-- Registration Form -->
-    <div class="container-fluid p-5">
-      <div class="card shadow rounded-3 bg-white w-100 px-5 py-3">
-        <form action="/register" method="post" enctype="multipart/form-data">
-          <h2 class="text-center">Registration Form</h2>
-          <!-- Name and Email and Mobile and DOB -->
-          <div class="row">
-            <!-- Full Name -->
-            <div class="col-md-3">
-              <div class="input-group mb-3">
+    <div class="container" style="padding-top: 7rem">
+      <div class="card shadow rounded-3 w-100">
+        <div class="card-body">
+          <form action="/register" method="post" enctype="multipart/form-data">
+            <h2 class="text-center card-title mb-2">Registration Form</h2>
+            <hr class="mt-0 mb-3" />
+            <!-- Name and Email and Mobile and DOB -->
+            <div class="row">
+              <!-- Full Name -->
+              <div class="col-md-4 mb-3">
+                <label for="fullName" class="form-label ms-2">Full Name</label>
                 <input
                   type="text"
                   class="form-control"
                   name="name"
+                  id="fullName"
                   placeholder="Full Name"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
+                  minlength="3"
+                  maxlength="50"
+                  pattern="[A-Za-z\s]+"
+                  title="Full name must contain only letters and spaces, and be at least 3 characters long."
+                  required
                 />
               </div>
-            </div>
 
-            <!-- DOB -->
-            <div class="col-md-3">
-              <div class="input-group mb-3">
-                <input type="date" name="dob" class="form-control" />
-              </div>
-            </div>
-
-            <!-- Email ID -->
-            <div class="col-md-3">
-              <div class="input-group mb-3">
+              <!-- Email ID -->
+              <div class="col-md-4 mb-3">
+                <label for="email" class="form-label ms-2">Email ID</label>
                 <input
-                  type="text"
+                  type="email"
                   class="form-control"
                   name="email"
+                  id="email"
                   placeholder="Email ID"
                   aria-label="Recipient's username"
                   aria-describedby="basic-addon2"
+                  required
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                  title="Please enter a valid email address (e.g., example@domain.com)"
                 />
               </div>
-            </div>
 
-            <!-- Mobile Number -->
-            <div class="col-md-3">
-              <div class="input-group mb-3">
+              <!-- Mobile Number -->
+              <div class="col-md-4 mb-3">
+                <label for="mobileNumber" class="form-label ms-2"
+                  >Mobile Number</label
+                >
                 <input
                   type="text"
                   class="form-control"
                   name="mobile"
+                  id="mobileNumber"
                   placeholder="Mobile Number"
                   aria-label="Recipient's username"
                   aria-describedby="basic-addon2"
+                  required
+                  pattern="[0-9]{10}"
+                  maxlength="10"
+                  title="Mobile number must be exactly 10 digits."
                 />
               </div>
             </div>
-          </div>
 
-          <!-- Gender -->
-          <div class="row">
-            <div class="col-md-1">Gender :</div>
-            <!-- Male -->
-            <div class="form-check col-md-1">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="gender"
-                id="male"
-                value="MALE"
-                checked
-              />
-              <label class="form-check-label" for="male"> Male </label>
-            </div>
-            <!-- Female -->
-            <div class="form-check col-md-1">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="gender"
-                id="female"
-                value="FEMALE"
-              />
-              <label class="form-check-label" for="female"> Female </label>
-            </div>
-          </div>
+            <div class="row">
+              <!-- DOB -->
+              <div class="col-md-4 mb-3">
+                <label for="dob" class="form-label ms-2"
+                  >Date of Birthday</label
+                >
+                <input
+                  type="date"
+                  name="dob"
+                  id="dob"
+                  class="form-control"
+                  required
+                  max=""
+                  min="1900-01-01"
+                />
+              </div>
 
-          <!-- Address -->
-          <div class="row">
-            <div class="form-floating col-md-5">
-              <textarea
-                class="form-control"
-                placeholder="Leave a comment here"
-                name="address"
-                id="floatingTextarea"
-              ></textarea>
-              <label for="floatingTextarea">Address</label>
-            </div>
-          </div>
+              <!-- Academic Year -->
+              <div class="col-md-4 mb-3">
+                <label for="academicYear" class="form-label ms-2"
+                  >Academic Year</label
+                >
+                <select
+                  class="form-select"
+                  name="academicYear"
+                  id="academicYear"
+                  aria-label="Default select example"
+                  required
+                >
+                  <option value="" selected disabled>
+                    Select Academic Year
+                  </option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
+                </select>
+              </div>
 
-          <!-- Hobbies -->
-          <div class="row">
-            <div class="col-md-1">Hobbies :</div>
-            <div class="form-check col-md-1">
-              <input
-                class="form-check-input"
-                name="hobby"
-                type="checkbox"
-                value="Web Development"
-                id="Web Development"
-              />
-              <label class="form-check-label" for="Web Development">
-                Web Development
-              </label>
-            </div>
-            <div class="form-check col-md-1">
-              <input
-                class="form-check-input"
-                name="hobby"
-                type="checkbox"
-                value="Cricket"
-                id="Cricket"
-              />
-              <label class="form-check-label" for="Cricket"> Cricket </label>
-            </div>
-            <div class="form-check col-md-1">
-              <input
-                class="form-check-input"
-                name="hobby"
-                type="checkbox"
-                value="Dancing"
-                id="Dancing"
-              />
-              <label class="form-check-label" for="Dancing"> Dancing </label>
-            </div>
-            <div class="form-check col-md-1">
-              <input
-                class="form-check-input"
-                name="hobby"
-                type="checkbox"
-                value="Singing"
-                id="Singing"
-              />
-              <label class="form-check-label" for="Singing"> Singing </label>
-            </div>
-          </div>
-
-          <!-- Academic Year and Photograph -->
-          <div class="row">
-            <!-- Academic Year -->
-            <div class="col-md-3">
-              <select
-                class="form-select"
-                name="academicYear"
-                aria-label="Default select example"
-              >
-                <option selected>Select Academic Year</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-              </select>
+              <!-- Gender -->
+              <div class="col-md-4 mb-3">
+                <label for="gender" class="form-label ms-2 mb-3">Gender</label>
+                <br />
+                <!-- Male -->
+                <div class="form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="male"
+                    value="MALE"
+                    checked
+                    required
+                  />
+                  <label class="form-check-label" for="male"> Male </label>
+                </div>
+                <!-- Female -->
+                <div class="form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="female"
+                    value="FEMALE"
+                    required
+                  />
+                  <label class="form-check-label" for="female"> Female </label>
+                </div>
+              </div>
             </div>
 
-            <!-- Photograph -->
-            <div class="mb-3 col-md-3">
-              <input
-                class="form-control"
-                name="photo"
-                type="file"
-                id="formFile"
-                onchange="getPreviewImage(event)"
-              />
-              <div class="photoPreview"></div>
+            <div class="row">
+              <!-- Address -->
+              <div class="col-md-6 mb-3">
+                <label for="address" class="form-label ms-2">Address</label>
+                <textarea
+                  class="form-control"
+                  placeholder="Leave a comment here"
+                  name="address"
+                  id="address"
+                  required
+                  maxlength="200"
+                  rows="3"
+                ></textarea>
+              </div>
+              <!--Photograph -->
+              <div class="col-md-3 mb-3">
+                <label for="photo" class="form-label ms-2">Photograph</label>
+                <input
+                  class="form-control"
+                  name="photo"
+                  type="file"
+                  id="formFile"
+                  onchange="getPreviewImage(event)"
+                  accept="image/*"
+                  required
+                />
+              </div>
+              <div class="col-md-3 mb-3 photoPreview"></div>
             </div>
-          </div>
 
-          <!-- Submit -->
-          <input class="btn btn-primary" type="submit" value="Submit" />
-        </form>
+            <!-- Hobbies -->
+            <div class="row">
+              <label for="hobbies" class="form-label ms-2">Hobbies</label>
+              <div class="col-md-12 mb-3">
+                <div class="row ms-2">
+                  <div class="form-check col-md-2">
+                    <input
+                      class="form-check-input"
+                      name="hobby"
+                      type="checkbox"
+                      value="Web Development"
+                      id="Web Development"
+                    />
+                    <label class="form-check-label" for="Web Development">
+                      Web Development
+                    </label>
+                  </div>
+                  <div class="form-check col-md-2">
+                    <input
+                      class="form-check-input"
+                      name="hobby"
+                      type="checkbox"
+                      value="Cricket"
+                      id="Cricket"
+                    />
+                    <label class="form-check-label" for="Cricket">
+                      Cricket
+                    </label>
+                  </div>
+                  <div class="form-check col-md-2">
+                    <input
+                      class="form-check-input"
+                      name="hobby"
+                      type="checkbox"
+                      value="Dancing"
+                      id="Dancing"
+                    />
+                    <label class="form-check-label" for="Dancing">
+                      Dancing
+                    </label>
+                  </div>
+                  <div class="form-check col-md-2">
+                    <input
+                      class="form-check-input"
+                      name="hobby"
+                      type="checkbox"
+                      value="Singing"
+                      id="Singing"
+                    />
+                    <label class="form-check-label" for="Singing">
+                      Singing
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <button
+              class="btn text-white w-100"
+              type="submit"
+              style="background-color: #1976d2"
+              onmouseover="this.style.backgroundColor='#1360ad'"
+              onmouseout="this.style.backgroundColor='#1976d2'"
+              value="Submit"
+            >
+              Register
+            </button>
+
+            <!-- <div class="d-flex justify-content-end">
+               <button class="btn text-white" type="submit" style="background-color: #1976D2;" value="Submit">Register</button>
+             </div> -->
+          </form>
+        </div>
       </div>
     </div>
 
     <script>
       async function getPreviewImage(event) {
         var image = URL.createObjectURL(event.target.files[0]);
-        $(".photoPreview").html('');
+        $(".photoPreview").html("");
         $(".photoPreview").append(`<img
                     src="${image}"
-                    width="100"
+                    width="95"
                     class="img-thumbnail"
                     alt="Photo"
                   />`);
       }
+
+      // Validations
+      const today = new Date();
+      const eighteenYearsAgo = new Date(
+        today.getFullYear() - 18,
+        today.getMonth(),
+        today.getDate()
+      )
+        .toISOString()
+        .split("T")[0];
+
+      $('input[name="dob"]').attr("max", eighteenYearsAgo);
     </script>
     <%- include('include/sweetalert') %>
   </body>

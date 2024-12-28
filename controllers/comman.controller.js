@@ -45,6 +45,21 @@ async function register(req, res, next) {
     req.body;
   const photo = req.file;
 
+  if (
+    !name ||
+    !dob ||
+    !email ||
+    !mobile ||
+    !gender ||
+    !address ||
+    !hobby ||
+    !academicYear ||
+    !photo
+  ) {
+    console.log("Hello");
+    res.send(Error);
+  }
+
   const username = await Username();
   const password = randomPassword();
 
@@ -65,7 +80,11 @@ async function register(req, res, next) {
     // file_path: document.path.slice(6),
   });
   await student.save();
-  req.session.sweetalert = { title: 'Registration Done',text: 'Credentials sent to your Registered Email ID', icon: 'success' }
+  req.session.sweetalert = {
+    title: "Registration Done",
+    text: "Credentials sent to your Registered Email ID",
+    icon: "success",
+  };
   res.redirect("/login");
 }
 async function Username() {
