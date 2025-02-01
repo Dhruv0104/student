@@ -79,9 +79,7 @@
             <div class="row">
               <!-- DOB -->
               <div class="col-md-4 mb-3">
-                <label for="dob" class="form-label ms-2"
-                  >Date of Birth</label
-                >
+                <label for="dob" class="form-label ms-2">Date of Birth</label>
                 <input
                   type="date"
                   name="dob"
@@ -235,6 +233,40 @@
               </div>
             </div>
 
+            <!-- States -->
+            <div class="col-md-4 mb-3">
+              <label for="states" class="form-label ms-2">State</label>
+              <select
+                class="form-select"
+                name="states"
+                id="states"
+                aria-label="Default select example"
+                onchange="getCities()"
+                required
+              >
+                <option value="" selected disabled>Select State</option>
+                <% states.forEach((state)=>{ %>
+                <option value="<%= state._id %>">
+                  <%= state.state_name %>
+                </option>
+                <% }); %>
+              </select>
+            </div>
+
+            <!-- Cities -->
+            <div class="col-md-4 mb-3">
+              <label for="cities" class="form-label ms-2">City</label>
+              <select
+                class="form-select"
+                name="cities"
+                id="cities"
+                aria-label="Default select example"
+                required
+              >
+                <option value="" selected disabled>Select City</option>
+              </select>
+            </div>
+
             <!-- Submit -->
             <button
               class="btn text-white w-100"
@@ -257,6 +289,8 @@
 
     <script>
       async function getPreviewImage(event) {
+        console.log(event);
+        
         var image = URL.createObjectURL(event.target.files[0]);
         $(".photoPreview").html("");
         $(".photoPreview").append(`<img
@@ -265,6 +299,21 @@
                     class="img-thumbnail"
                     alt="Photo"
                   />`);
+      }
+
+      async function getCities() {
+        $("#cities").html(
+          `<option value="" selected disabled>Select Cities</option>`
+        );
+        const stateId = $("#states").val();
+        if(!stateId) return;
+        
+        const response = await fetch(`/state/${stateId}`);
+        const cities = await response.json();
+
+        cities.forEach((city) => {
+          $("#cities").append(`<option value="${city}">${city}</option>`);
+        });
       }
 
       // Validations

@@ -3,9 +3,9 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-const commonController = require("../controllers/comman.controller")
+const commonController = require("../controllers/comman.controller");
 
-const { asyncRouteHandler } = require('../utils/route.util');
+const { asyncRouteHandler } = require("../utils/route.util");
 
 const router = express.Router();
 
@@ -59,12 +59,16 @@ const upload = multer({ storage: storage });
 
 // Registration Route
 router.get("/", asyncRouteHandler(commonController.registrationPage));
-router.post("/register",upload.single("photo"), asyncRouteHandler(commonController.register));
+router.get("/state/:stateId", asyncRouteHandler(commonController.fetchCities));
+router.post(
+  "/register",
+  upload.single("photo"),
+  asyncRouteHandler(commonController.register)
+);
 
 // Login Route
 router.get("/login", asyncRouteHandler(commonController.loginPage));
 router.post("/login", asyncRouteHandler(commonController.login));
 router.get("/logout", asyncRouteHandler(commonController.logout));
-
 
 module.exports = router;

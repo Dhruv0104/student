@@ -7,7 +7,7 @@
     <%- include('include/header') %>
   </head>
   <body>
-    <%- include('include/navbar') %>
+    <%- include('include/navbar1') %>
 
     <div class="container" style="padding-top: 7rem">
       <div class="card shadow rounded-3 w-100">
@@ -684,6 +684,8 @@
         }
         $(".hobbies").html(html);
 
+        console.log($(".viewPhoto"));
+        
         $(".viewPhoto").attr("src", `${student.photo_path}`);
         // $(".previewPhoto").attr(
         //   "onclick",

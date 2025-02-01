@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const studentModel = require("../model/students.model");
+const statesModel = require("../model/states.model");
 
 // **********Login***************
 async function loginPage(req, res, next) {
@@ -38,7 +39,15 @@ async function logout(req, res, next) {
 
 // **********Registration***************
 async function registrationPage(req, res, next) {
-  return res.render("registration");
+  const states = await statesModel.find({}).sort("state_name");
+  return res.render("registration", { states });
+}
+async function fetchCities(req, res, next) {
+  const stateId = req.params.stateId;
+  console.log(stateId);
+  
+  const cities = await statesModel.findOne({ _id: stateId });
+  return res.send(cities.cities.sort());
 }
 async function register(req, res, next) {
   const { name, dob, email, mobile, gender, address, hobby, academicYear } =
@@ -103,4 +112,11 @@ function randomPassword() {
 }
 // **********Registration***************
 
-module.exports = { loginPage, login, registrationPage, register, logout };
+module.exports = {
+  loginPage,
+  login,
+  registrationPage,
+  register,
+  logout,
+  fetchCities,
+};
